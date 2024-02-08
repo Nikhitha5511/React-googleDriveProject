@@ -1,0 +1,357 @@
+
+.HeaderContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 14px;
+    height:65px;
+    background-color: #f7fafa;
+    margin-top: 0;
+    margin-bottom: 0;
+   
+  }
+  .headerLogo{
+    display: flex;
+    align-items: center;
+  }
+  
+  .headerLogo img{
+    width:40px;
+  }
+  
+  .headerLogo span{
+    font-size: 22px;
+    margin-left: 10px;
+    color:black;
+  }
+  
+  .headerSearch{
+    display: flex;
+    align-items: center;
+    width: 700px;
+    background-color:rgb(240, 239, 239);
+    padding: 12px;
+    border-radius: 50px;
+  }
+  
+  .headerSearch input{
+      background-color: transparent;
+      border: 0;
+      outline: 0;
+      flex: 1;
+      color:black;
+  }
+  .searchtext::placeholder{
+    color:black;
+    padding: 20px;
+    font-size: 16px;
+  }
+  
+  .headerIcons{
+    display: flex;
+    align-items: center;
+    
+  }
+  .headerIcons span{
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    gap:13px;
+  }
+  
+  .sidebarButton button{
+    background-color:white;
+    border: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding:5px 10px;
+    box-shadow:0px 4px 6px rgba(0,0,0,0.1);
+    margin-left: 20px;
+    height:50px;
+    width:100px;
+    
+  }
+  
+  .sidebarButton span{
+      font-size: 16px;
+      margin-right: 20px;
+      margin-left: 10px;
+  }
+  
+  .sidebarOptions{
+    margin-top: 12px;
+    
+  }
+  .sidebarOption{
+    display: flex;
+    align-items: center;
+    padding: 8px 20px;
+    border-radius: 0px 20px 20px 0px;
+    
+  }
+  .sidebarOption span{
+    margin-left: 15px;
+    font-size: 15px;
+    
+  }
+  .sidebarContainer{
+    width:300px;
+    background-color: #f7fafa;
+    height:100vh;
+  }
+  .progress_bar span {
+    display: block;
+    color:#333;
+    font-size: 13px;
+    margin-left: 15px;
+    
+  }
+  .bar{
+    margin-left: 15px;
+  }
+  
+  .dataContainer{
+    flex: 1 1;
+    padding: 10px 0px 0px 20px;
+  }
+  
+  .dataHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+  }
+  
+  .dataHeader .headerLeft {
+    display: flex;
+    align-items: center;
+  }
+  
+  .App{
+    display: grid;
+    grid-template-columns: 300px auto 50px;
+  }
+  
+  .dataContainer{
+    flex:1 1;
+    padding: 10px 0px 0px 20px;
+  
+  }
+  
+  .dataHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    margin-bottom: 120px;
+  }
+  
+  .dataHeader.headerLeft{
+    display: flex;
+    align-items: center;
+    
+  }
+  .text{
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .listicon{
+    margin-right: 20px;
+  }
+  .dataHeader.headerRight{
+    margin-right: 20px;
+  
+  }
+  .headerRight{
+    gap:30px;
+  }
+  .arrow{
+    margin-left:-820px;
+  }
+  .dataList{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid #ccc; 
+  justify-content: space-between;
+  font-size: 16px;
+  margin-top: -8px;
+  width:100%;
+  }
+  
+  .dataListRow{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc; 
+    margin-top: -7px;
+  }
+  .dynamicdata{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap:70px;
+    margin-right: 200px;
+  }
+  .space1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap:54px;
+    margin-right: 190px;
+    
+   
+  }
+  .avatar{
+    display: flex;
+    flex-direction: column;
+    margin-left:100px;
+    align-items: center;
+    font-size: 10px;
+  }
+  
+  .login{
+    background: white;
+    padding: 20px;
+    width: 350px;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    border:1px solid rgb(227, 224, 224);
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    height:400px;
+  }
+  .login img{
+    width:240px;
+    height:180px;
+    border-bottom: 0;
+  }
+  
+  .login button{
+    width: 130px;
+    height:38px;
+    background-color: rgb(0, 115, 255);
+    color:white;
+    font-weight: bold;
+    font-size: 18px;
+    border:none;
+    border-radius: 6px;
+    margin-top: 20px;
+  
+  }
+  .login h3{
+  margin-top:-40px;
+  font-size: 22px;
+  }
+  
+  .login p{
+    margin-top:-10px;
+    font-size: 18px;
+  }
+  .flex1{
+    display: flex;
+    align-items: center;
+    gap:8px;
+    background-color: white;
+    border:none;
+    margin:10px;
+    width:160px;
+    height:30px;
+  }
+  .flex1:hover{
+    background-color: rgb(236, 234, 234);
+    width:160px;
+    height:30px;
+  }
+  .popUp1{
+    width:160px;
+    background-color: white;
+    height:160px;
+    display: flex;
+    flex-direction: column;
+    box-shadow:0px 4px 6px rgba(0,0,0,0.1);
+    align-items: center;
+    border-radius: 6px;
+    border:1px solid rgb(236, 233, 233);
+     
+  
+  }
+  hr{
+    width:160px;
+    color:black;
+  }
+  .top{
+    margin-top:10px;
+  }
+  .popUp1 {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+  }
+  .seconddiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .response{
+    background: none;
+    border:none;
+    font-size: 14px;
+  }
+  
+  .dataListRow {
+    position: relative; 
+  }
+  
+  .iconData {
+    display: flex; 
+    position: absolute; 
+    top: 50%; 
+    right: 0;
+    transform: translateY(-50%);
+    transition: opacity 0.3s ease; 
+    opacity: 0; 
+    margin-left: auto; 
+  }
+  .dataListRow:hover .iconData {
+    display: block; 
+    opacity: 1; 
+   
+  }
+  .dataListRow:hover{
+    background-color:rgb(240, 239, 239);
+  }
+  
+  .binContainer{
+    display: flex;
+    justify-content: space-around;
+    margin:15px;
+    align-items: center;
+    flex-direction: column;
+    
+  }
+  
+  .firstCntainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .headtext{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap:1200px;
+  }
