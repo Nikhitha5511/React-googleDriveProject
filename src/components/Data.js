@@ -10,7 +10,7 @@ const Data = ({photoURL}) => {
     const [showShareModal, setShowShareModal] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null); 
 
-
+    
 
     useEffect(() => {
         const unsubscribe = db.collection('files').onSnapshot(snapshot => {
@@ -73,8 +73,6 @@ const Data = ({photoURL}) => {
     
     const shareFile = () => {
         if (!selectedFile || !shareEmail) return;
-    
-        // Add shared file data to Firestore
         db.collection('sharedFiles').add({
             fileId: selectedFile.id,
             recipientEmail: shareEmail,
@@ -172,6 +170,7 @@ const Data = ({photoURL}) => {
                     <button onClick={() => setShowShareModal(false)}>Cancel</button>
                 </div>
             )}
+          
           
            
         </div>
