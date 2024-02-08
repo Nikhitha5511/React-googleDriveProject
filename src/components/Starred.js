@@ -3,19 +3,21 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../Firebase/Firebase';
 
 
-const Bin=({photoURL})=>{
+const Starred=({photoURL})=>{
     const [files, setFiles] = useState([]);
+    const [starredFiles, setStarredFiles] = useState([]);
 
     useEffect(() => {
-        const unsubscribe = db.collection('bin').onSnapshot(snapshot => {
-            setFiles(snapshot.docs.map(doc => ({
+        const unsubscribe = db.collection('files').where('starred', '==', true).onSnapshot(snapshot => {
+            setStarredFiles(snapshot.docs.map(doc => ({
                 id: doc.id,
                 data: doc.data()
-            })));
+            })))
         });
         return () => unsubscribe();
     }, []);
 
+   
     const changeBytes = (bytes, decimals = 2) => {
         if (bytes === 0) return '0 Bytes';
         const k = 1024;
@@ -28,12 +30,14 @@ const Bin=({photoURL})=>{
         const options = { day: '2-digit', month: 'short', year: 'numeric' };
         return new Date(date).toLocaleDateString('en-GB', options);
     }
+    
+
    return(
     <>
      <div className='dataContainer'>
             <div className='dataHeader'>
                 <div className="headerLeft">
-                    <p className='text'> Bin for My Drive</p>
+                    <p className='text'>Starred</p>
                     <i className="fa-solid fa-caret-down"></i>
                 </div>
                 <div className="headerRight">
@@ -50,7 +54,7 @@ const Bin=({photoURL})=>{
                     <p><b>File Size</b></p>
                 </div>
             </div>
-            {files.map(file => (
+            {starredFiles.map(file => (
             <div  key={file.id} className='dataListRow'>
                 <a href={file.data.fileURL}  target='_blank'>
                      {file.data.filename}
@@ -74,4 +78,4 @@ const Bin=({photoURL})=>{
 }
 
 
-export default Bin;
+export default Starred;

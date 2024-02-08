@@ -12,6 +12,8 @@ const Sidebar=()=>{
     const popUpRef = useRef(null);
     const fileInputRef = useRef(null);
     const [isPopUpVisible, setIsPopUpVisible] = useState(false);
+    const [isFolderPopUpVisible, setIsFolderPopUpVisible] = useState(false);
+    const [folderName, setFolderName] = useState('');
 
     const handleFileUpload = async(file) => {
         console.log("File selected:", file.name);
@@ -66,6 +68,25 @@ const Sidebar=()=>{
         const file = event.target.files[0];
         handleFileUpload(file);
     };
+    
+    const handleCreateFolder = () => {
+        if (folderName.trim() !== '') {
+            db.collection('folders').add({
+                name: folderName,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                console.log('Folder created successfully');
+                setFolderName('');
+                setIsFolderPopUpVisible(false);
+            }).catch((error) => {
+                console.error('Error creating folder:', error);
+            });
+        }
+    };
+    const handleNewFolderClick = () => {
+        setIsPopUpVisible(false); 
+        setIsFolderPopUpVisible(true); 
+    };
 
     return(
         <>
@@ -99,8 +120,8 @@ const Sidebar=()=>{
                         <span>Recent</span>
                     </div>
                     <div className='sidebarOption'>
-                    <i class="far fa-star"></i>
-                        <span>Starred</span>
+                    <i className="far fa-star"></i>
+                    <Link to='starred'><span>Starred</span></Link>
                     </div>
                     <div className='sidebarOption'>
                     <i className="fas fa-info-circle"></i>
@@ -122,20 +143,34 @@ const Sidebar=()=>{
                 {isPopUpVisible && (
                     <div className='popUp1' ref={popUpRef}>
                         <div className='top'>
-                            <button className='flex1'>
+                            <button onClick={handleNewFolderClick} className='flex1'>
                             <i className="fas fa-folder"></i>
-
-                                <span>New Folder</span>
+                            <span>New Folder</span>
                             </button>
                             <hr></hr>
                             <button  className='flex1' onClick={handleButtonClick}>
-                            <i class="fas fa-cloud-upload-alt"></i>
+                            <i className="fas fa-cloud-upload-alt"></i>
                                 <span>File Upload</span>
                             </button>
                             <button className='flex1'>
-                            <i class="fas fa-cloud-upload-alt"></i>
+                            <i className="fas fa-cloud-upload-alt"></i>
                                 <span>Folder Upload</span>
                             </button>
+                        </div>
+                    </div>
+                )}
+                 {isFolderPopUpVisible && (
+                    <div className='folderPopUp'>
+                        <input
+                            type="text"
+                            value={folderName}
+                            onChange={(e) => setFolderName(e.target.value)}
+                            placeholder="Enter folder name"
+                        />
+                        <div className='buttonContainer'>
+                            <button onClick={handleCreateFolder}>Create</button>
+                          
+                            <button onClick={() => setIsFolderPopUpVisible(false)}>Cancel</button>
                         </div>
                     </div>
                 )}

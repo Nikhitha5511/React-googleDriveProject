@@ -7,15 +7,15 @@ const Header=({ photoURL })=>{
             <span>Drive</span>
             </div>
             <div className='headerSearch'>
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <i className="fa-solid fa-magnifying-glass"></i>
             <input  className='searchtext' type="text" placeholder='Search in Drive' />
-            <i class="fas fa-align-center"></i>
+            <i className="fas fa-align-center"></i>
             </div>
             <div className='headerIcons'>
             <span>
-            <i className="fa-regular fa-circle-question"></i>
-            <i className="fa-solid fa-gear"></i>
-            <i class="fas fa-th-large"></i>
+            <i className="fa-regular fa-circle-question large-icon"></i>
+            <i className="fa-solid fa-gear large-icon"></i>
+            <i className="fas fa-th-large large-icon"></i>
             <img src={photoURL} alt="User Image" style={{width:'40px',height:'40px',borderRadius:'50px'}}></img>
 
                 </span>

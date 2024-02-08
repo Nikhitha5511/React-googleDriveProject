@@ -9,10 +9,18 @@ import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import Bin from './components/Bin';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-
+import { useEffect} from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import Starred from './components/Starred';
 
 function App() {
   const [user, setUser] = useState(null);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+    return () => unsubscribe();
+  }, []);
 
    const signInWithGoogle = () => {
         signInWithPopup(auth, provider)
@@ -40,6 +48,7 @@ function App() {
      <Routes>
       <Route path="/drive" element={<Data photoURL={user.photoURL} />} />
       <Route path="/bin" element={<Bin photoURL={user.photoURL} />} />
+      <Route path="/starred" element={<Starred photoURL={user.photoURL} />} />
       <Route path="/" element={<Navigate to="/drive" />} />
       </Routes>
      
