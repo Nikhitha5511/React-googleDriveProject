@@ -11,7 +11,7 @@ const Data = ({photoURL}) => {
     const [selectedFile, setSelectedFile] = useState(null); 
     const [displayMode, setDisplayMode] = useState('list'); 
     const [activeButton, setActiveButton] = useState('list');
-
+    
 
     const [folders, setFolders] = useState([]);
 

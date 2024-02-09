@@ -497,7 +497,10 @@
   width:100px;
   height:30px;
   border-radius: 5px;
-  margin-left: 20px;
+  margin-left: 1400px;
+  margin-bottom: 70px;
+  
+  
 }
 
 
@@ -509,6 +512,7 @@
   border-radius: 50px;
   height: 35px;
   position: relative;
+ 
 }
 
 .responseButtonside::after {

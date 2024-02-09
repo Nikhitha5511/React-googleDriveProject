@@ -5,6 +5,9 @@ import { db } from '../Firebase/Firebase';
 
 const Bin=({photoURL})=>{
     const [files, setFiles] = useState([]);
+    const [selectedFile, setSelectedFile] = useState(null); 
+    const [displayMode, setDisplayMode] = useState('list'); 
+    const [activeButton, setActiveButton] = useState('list');
 
     useEffect(() => {
         const unsubscribe = db.collection('bin').onSnapshot(snapshot => {
@@ -44,18 +47,49 @@ const Bin=({photoURL})=>{
    return(
     <>
      <div className='dataContainer'>
+        <div>
             <div className='dataHeader'>
                 <div className="headerLeft">
                     <p className='text'> Bin for My Drive</p>
                     <i className="fa-solid fa-caret-down"></i>
                 </div>
                 <div className="headerRight">
-                <i className="fa-solid fa-list"></i>
-                <i className="fas fa-info-circle info-icon dt1"></i>
+                <div className='responseButtonside'>
+                <button
+            className={`firstButton ${activeButton === 'list' ? 'activeButton' : ''}`}
+            onClick={() => {
+                setDisplayMode('list');
+                setActiveButton('list');
+            }}
+            style={{ backgroundColor: activeButton === 'list' ? '#b1f0f0' : 'transparent' }}
+
+        >
+        <i className="fa-solid fa-bars">  {activeButton === 'list' && <span><i class="fa-solid fa-check tick1"></i></span>}</i>
+
+        </button>
+        <button
+            className={`secondButton ${activeButton === 'grid' ? 'activeButton' : ''}`}
+            onClick={() => {
+                setDisplayMode('grid');
+                setActiveButton('grid');
+            }}
+            style={{ backgroundColor: activeButton === 'grid' ? '#b1f0f0' : 'transparent' }}
+
+        >
+            
+            <i className="fas fa-th-large large-icon">  {activeButton === 'grid' && <span><i class="fa-solid fa-check tick2"></i></span>}</i>
+
+        </button>
+               
+            </div>
+            </div>
+            </div>
                 <button onClick={handleEmptyBin} className="emptybutton">Empty Bin</button>
 
                 </div>
-            </div>
+            
+            {displayMode === 'list' && (
+            <div className='body'>
             <div className='dataList'>
                 <p><b>Name</b></p>
                 <div className='space1'>
@@ -78,6 +112,23 @@ const Bin=({photoURL})=>{
             </div>
 
             ))}
+            </div>
+            )}
+
+          {displayMode === 'grid' && (
+          <div className='dataGrid'>
+          <h3 className='showFile'>All Files</h3>
+          {files.map(file => (
+          <div key={file.id} className='dataFile'>
+          <i class="fa-regular fa-file iconFile"></i>
+          <a href={file.data.fileURL}  target='_blank'>
+          <p className='filename'>{file.data.filename}</p>
+          </a>
+         </div>
+         ))}
+            </div>
+       
+       )}
             </div>
   
     
