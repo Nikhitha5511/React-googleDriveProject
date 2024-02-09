@@ -16,30 +16,7 @@ const Sidebar=()=>{
     const [isFolderPopUpVisible, setIsFolderPopUpVisible] = useState(false);
     const [folderName, setFolderName] = useState('');
 
-    // const handleFileUpload = async(file) => {
-    //     console.log("File selected:", file.name);
-
-    //     try {
-    //         const storage = getStorage();
-    //         const storageRef = ref(storage, `files/${file.name}`);
-    //         const uploadTask = uploadBytesResumable(storageRef, file);
-    //         const snapshot = await uploadTask;
-
-    //         const downloadURL = await getDownloadURL(snapshot.ref);
-
-    //         await db.collection('files').add({
-    //             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    //             filename: file.name,
-    //             fileURL: downloadURL,
-    //             size: snapshot.totalBytes
-    //         });
-
-    //         console.log("File uploaded and details saved to Firestore!");
-    //     } catch (error) {
-    //         console.error("Error uploading file: ", error);
-    //     }
-    // };
-    // In the handleFileUpload function in Sidebar.js
+    
 
 const handleFileUpload = async(file) => {
     console.log("File selected:", file.name);
@@ -103,7 +80,8 @@ const handleFileUpload = async(file) => {
         if (folderName.trim() !== '') {
             db.collection('folders').add({
                 name: folderName,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+
             }).then(() => {
                 console.log('Folder created successfully');
                 setFolderName('');
@@ -181,10 +159,6 @@ const handleFileUpload = async(file) => {
                             <button  className='flex1' onClick={handleButtonClick}>
                             <i className="fas fa-cloud-upload-alt"></i>
                                 <span>File Upload</span>
-                            </button>
-                            <button className='flex1'>
-                            <i className="fas fa-cloud-upload-alt"></i>
-                                <span>Folder Upload</span>
                             </button>
                         </div>
                     </div>

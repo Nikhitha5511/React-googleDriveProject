@@ -9,8 +9,23 @@ const Data = ({photoURL}) => {
     const [shareEmail, setShareEmail] = useState('');
     const [showShareModal, setShowShareModal] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null); 
+    const [displayMode, setDisplayMode] = useState('list'); 
+    const [activeButton, setActiveButton] = useState('list');
 
-    
+
+    const [folders, setFolders] = useState([]);
+
+    useEffect(() => {
+        const unsubscribe = db.collection('folders').onSnapshot(snapshot => {
+            setFolders(snapshot.docs.map(doc => ({
+                id: doc.id,
+                name: doc.data().name,
+                date: doc.data().date, 
+                timestamp: doc.data().timestamp,
+            })));
+        });
+        return () => unsubscribe();
+    }, []);
 
     useEffect(() => {
         const unsubscribe = db.collection('files').onSnapshot(snapshot => {
@@ -69,6 +84,16 @@ const Data = ({photoURL}) => {
         setSelectedFile(file);
         setShowShareModal(true);
     };
+    
+    const deleteFolder = (id) => {
+        db.collection('folders').doc(id).delete()
+            .then(() => {
+                console.log('Folder deleted successfully');
+            })
+            .catch((error) => {
+                console.error('Error deleting folder:', error);
+            });
+    };
 
     
     const shareFile = () => {
@@ -124,13 +149,39 @@ const Data = ({photoURL}) => {
                     <i className="fa-solid fa-caret-down"></i>
                 </div>
                 <div className="headerRight">
-                <i className="fa-solid fa-list"></i>
-                <i className="fas fa-info-circle info-icon dt1"></i>
+                    <div className='responseButtonside'>
+                <button
+            className={`firstButton ${activeButton === 'list' ? 'activeButton' : ''}`}
+            onClick={() => {
+                setDisplayMode('list');
+                setActiveButton('list');
+            }}
+            style={{ backgroundColor: activeButton === 'list' ? '#b1f0f0' : 'transparent' }}
+
+        >
+        <i className="fa-solid fa-bars">  {activeButton === 'list' && <span><i class="fa-solid fa-check tick1"></i></span>}</i>
+
+        </button>
+        <button
+            className={`secondButton ${activeButton === 'grid' ? 'activeButton' : ''}`}
+            onClick={() => {
+                setDisplayMode('grid');
+                setActiveButton('grid');
+            }}
+            style={{ backgroundColor: activeButton === 'grid' ? '#b1f0f0' : 'transparent' }}
+
+        >
+            
+            <i className="fas fa-th-large large-icon">  {activeButton === 'grid' && <span><i class="fa-solid fa-check tick2"></i></span>}</i>
+
+        </button>
+                </div>
                 </div>
             </div>
+            {displayMode === 'list' && (
+            <div className='body'>
             <div className='dataList'>
                 <p><b>Name</b></p>
-                <span className='arrow'><i className="fa-solid fa-arrow-up"></i></span>
                 <div className='space1'>
                     <p><b>Owner</b></p>
                     <p><b>Last Modified</b></p>
@@ -156,8 +207,28 @@ const Data = ({photoURL}) => {
                 </button>
             </div>
             </div>
+           
 
             ))}
+            </div>
+              )}
+
+            {folders.map(folder =>(
+            <div  key={folder.id} className='dataListRow'>
+               <p><i class="fa-solid fa-folder"></i> {folder.name}</p>
+                <div className='dynamicdata'>
+                <p className='avatar3'><img src={photoURL} alt="User Image" style={{width:'30px',height:'30px',borderRadius:'50px'}}></img></p>
+
+                </div>
+                <div className='iconData'>
+                <button onClick={() => deleteFolder(folder.id)} className='response'><i className="fas fa-trash-alt"></i></button>
+
+            </div>
+               
+            </div>
+
+            ))}
+            
             {showShareModal && (
                 <div className="shareModal">
                     <input
@@ -171,8 +242,20 @@ const Data = ({photoURL}) => {
                 </div>
             )}
           
-          
-           
+          {displayMode === 'grid' && (
+          <div className='dataGrid'>
+          <h3 className='showFile'>All Files</h3>
+          {files.map(file => (
+          <div key={file.id} className='dataFile'>
+          <i class="fa-regular fa-file iconFile"></i>
+          <a href={file.data.fileURL}  target='_blank'>
+          <p className='filename'>{file.data.filename}</p>
+          </a>
+         </div>
+         ))}
+            </div>
+       
+       )}
         </div>
     );
 }

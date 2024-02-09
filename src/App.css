@@ -90,6 +90,10 @@
     border-radius: 0px 20px 20px 0px;
     
   }
+  .sidebarOption:hover{
+    background-color: rgb(217, 213, 213);
+    width:180px;
+  }
   .sidebarOption span{
     margin-left: 15px;
     font-size: 15px;
@@ -150,6 +154,7 @@
   .dataHeader.headerLeft{
     display: flex;
     align-items: center;
+  
     
   }
   .text{
@@ -167,6 +172,8 @@
   .dataHeader.headerRight{
     margin-right: 20px;
     gap:10px;
+    display: flex;
+    flex-direction: row;
   
   }
   
@@ -283,7 +290,7 @@
   .popUp1{
     width:160px;
     background-color: white;
-    height:160px;
+    height:130px;
     display: flex;
     flex-direction: column;
     box-shadow:0px 4px 6px rgba(0,0,0,0.1);
@@ -377,10 +384,9 @@
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
-    width: 300px; /* Adjust the width as needed */
+    width: 300px;
 }
 
-/* Style for the input field */
 .shareModal input[type="email"] {
     width: 100%;
     padding: 10px;
@@ -390,7 +396,6 @@
     box-sizing: border-box;
 }
 
-/* Style for the buttons */
 .shareModal button {
     padding: 10px 20px;
     margin-right: 10px;
@@ -416,14 +421,14 @@
 
 .folderPopUp {
   position: fixed;
-  top: 50%; /* Adjust as per your design */
-  left: 50%; /* Adjust as per your design */
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
   border: 1px solid #ccc;
   padding: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  z-index: 999; /* Ensure it appears above other elements */
+  z-index: 999; 
 }
 
 .folderPopUp input[type='text'] {
@@ -493,4 +498,115 @@
   height:30px;
   border-radius: 5px;
   margin-left: 20px;
+}
+
+
+.responseButtonside {
+  display: flex;
+  align-items: center;
+  width: 125px;
+  border: 1px solid black;
+  border-radius: 50px;
+  height: 35px;
+  position: relative;
+}
+
+.responseButtonside::after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  background-color: black;
+  top: 0;
+  left: 50%; 
+  transform: translateX(-50%);
+} 
+
+
+
+.firstButton {
+  width: 64.5px;
+  height: 35px;
+  border: none;
+  margin-right: 9px;
+  background-color: transparent;
+  font-size: 16px;
+  border-radius: 50px;
+}
+
+.secondButton {
+  width: 62.5px;
+  height: 35px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50px;
+}
+
+.dataGrid{
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+   
+}
+
+.dataFile{
+  text-align: center;
+  border: 1px solid rgb(204 204 204 / 46%);
+  margin: 10px;
+  min-width: 200px;
+  max-height:300px;
+  padding: 10px 0px 0px 0px;
+  border-radius: 5px;
+  
+}
+
+.dataFile p{
+  border-top: 1px solid #ccc;
+  margin-top: 25px;
+  font-size: 14px;
+  background: whitesmoke;
+  padding:10px 0;
+  margin-bottom: 0;
+}
+.iconFile{
+  font-size: 60px;
+}
+
+.avatar3{
+  margin-right:270px;
+}
+.showFile{
+  margin-bottom: 280px;
+}
+
+.tickIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px; 
+  background-color: #000; 
+  border-radius: 50%;
+  transition: left 0.3s ease, right 0.3s ease;
+}
+
+.firstButton {
+  position: relative;
+}
+
+.secondButton {
+  position: relative;
+
+}
+
+.activeButton .tickIcon {
+  left: 8px;
+}
+.tick1{
+  margin-left: 4px;
+} 
+.tick2{
+  margin-left: 3px;
 }
