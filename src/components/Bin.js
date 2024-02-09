@@ -28,6 +28,19 @@ const Bin=({photoURL})=>{
         const options = { day: '2-digit', month: 'short', year: 'numeric' };
         return new Date(date).toLocaleDateString('en-GB', options);
     }
+
+    const handleEmptyBin = () => {
+       
+        db.collection('bin').get().then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+                doc.ref.delete();
+            });
+        }).catch(error => {
+            console.error('Error emptying Bin:', error);
+        });
+    };
+
+
    return(
     <>
      <div className='dataContainer'>
@@ -39,11 +52,12 @@ const Bin=({photoURL})=>{
                 <div className="headerRight">
                 <i className="fa-solid fa-list"></i>
                 <i className="fas fa-info-circle info-icon dt1"></i>
+                <button onClick={handleEmptyBin} className="emptybutton">Empty Bin</button>
+
                 </div>
             </div>
             <div className='dataList'>
                 <p><b>Name</b></p>
-                <span><i className="fa-solid fa-arrow-up"></i></span>
                 <div className='space1'>
                     <p><b>Owner</b></p>
                     <p><b>Last Modified</b></p>

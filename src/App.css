@@ -484,3 +484,13 @@
   margin-left: 240px;
   font-size: 20px;
 }
+
+.emptybutton{
+  background-color: rgb(236, 235, 235);
+  border:none;
+  color:black;
+  width:100px;
+  height:30px;
+  border-radius: 5px;
+  margin-left: 20px;
+}

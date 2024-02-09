@@ -6,6 +6,7 @@ import { db } from '../Firebase/Firebase';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import firebase from 'firebase/compat/app'; 
 import { Link } from 'react-router-dom';
+import { auth, provider } from '../Firebase/Firebase';
 
 
 const Sidebar=()=>{
@@ -15,29 +16,58 @@ const Sidebar=()=>{
     const [isFolderPopUpVisible, setIsFolderPopUpVisible] = useState(false);
     const [folderName, setFolderName] = useState('');
 
-    const handleFileUpload = async(file) => {
-        console.log("File selected:", file.name);
+    // const handleFileUpload = async(file) => {
+    //     console.log("File selected:", file.name);
 
-        try {
-            const storage = getStorage();
-            const storageRef = ref(storage, `files/${file.name}`);
-            const uploadTask = uploadBytesResumable(storageRef, file);
-            const snapshot = await uploadTask;
+    //     try {
+    //         const storage = getStorage();
+    //         const storageRef = ref(storage, `files/${file.name}`);
+    //         const uploadTask = uploadBytesResumable(storageRef, file);
+    //         const snapshot = await uploadTask;
 
-            const downloadURL = await getDownloadURL(snapshot.ref);
+    //         const downloadURL = await getDownloadURL(snapshot.ref);
 
-            await db.collection('files').add({
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                filename: file.name,
-                fileURL: downloadURL,
-                size: snapshot.totalBytes
-            });
+    //         await db.collection('files').add({
+    //             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    //             filename: file.name,
+    //             fileURL: downloadURL,
+    //             size: snapshot.totalBytes
+    //         });
 
-            console.log("File uploaded and details saved to Firestore!");
-        } catch (error) {
-            console.error("Error uploading file: ", error);
-        }
-    };
+    //         console.log("File uploaded and details saved to Firestore!");
+    //     } catch (error) {
+    //         console.error("Error uploading file: ", error);
+    //     }
+    // };
+    // In the handleFileUpload function in Sidebar.js
+
+const handleFileUpload = async(file) => {
+    console.log("File selected:", file.name);
+
+    try {
+        const storage = getStorage();
+        const storageRef = ref(storage, `files/${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+        const snapshot = await uploadTask;
+
+        const downloadURL = await getDownloadURL(snapshot.ref);
+
+        const user = auth.currentUser;
+
+        await db.collection('files').add({
+            userId: user.uid, 
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            filename: file.name,
+            fileURL: downloadURL,
+            size: snapshot.totalBytes
+        });
+
+        console.log("File uploaded and details saved to Firestore!");
+    } catch (error) {
+        console.error("Error uploading file: ", error);
+    }
+};
+
 
     useEffect(() => {
         function handleClickOutside(event) {

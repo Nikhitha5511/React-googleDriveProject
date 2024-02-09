@@ -47,7 +47,6 @@ const Starred=({photoURL})=>{
             </div>
             <div className='dataList'>
                 <p><b>Name</b></p>
-                <span><i className="fa-solid fa-arrow-up"></i></span>
                 <div className='space1'>
                     <p><b>Owner</b></p>
                     <p><b>Last Modified</b></p>
